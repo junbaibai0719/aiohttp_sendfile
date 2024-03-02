@@ -31,5 +31,7 @@ async def main():
     async with aiohttp.ClientSession() as sess:
         await upload(sess, pathlib.Path('test.py'))
         await upload_sendfile(sess, pathlib.Path('test.py'))
+        with open("./uploads/sendfiletest.py", "rb") as fp, open("./uploads/test.py", "rb") as fp2:
+            assert fp.read() == fp2.read()
 
 asyncio.run(main())
